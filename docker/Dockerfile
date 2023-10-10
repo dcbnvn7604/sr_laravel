@@ -13,3 +13,4 @@ copy src /app
 workdir /app
 
 run composer install
+run chmod o+w -R bootstrap/cache storage
