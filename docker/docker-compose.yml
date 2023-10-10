@@ -1,0 +1,10 @@
+name: sr_laravel
+services:
+  php:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ../src:/app
+      - /app/vendor
+    
