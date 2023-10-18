@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use Throwable;
 use Exception;
 
@@ -27,6 +28,11 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             if (!config('app.debug')) {
                 return false;
+            }
+        });
+        $this->renderable(function (Throwable $e, Request $request) {
+            if ($request->is('api/*')) {
+                return response()->json(null, 500);
             }
         });
     }
