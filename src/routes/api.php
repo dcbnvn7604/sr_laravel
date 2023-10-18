@@ -1,5 +1,6 @@
 <?php
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,10 @@ use App\Http\Controllers\Auth;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::post('/auth', [Auth::class, 'post']);
+Route::get('/success', function (Request $request) {
+    return;
+});
+Route::get('/fail', function (Request $request) {
+    throw new Exception('fail');
+});
