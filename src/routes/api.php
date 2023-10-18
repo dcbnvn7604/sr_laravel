@@ -23,6 +23,6 @@ Route::post('/auth', [Auth::class, 'post']);
 Route::get('/success', function (Request $request) {
     return;
 });
-Route::get('/fail', function (Request $request) {
+Route::post('/fail', function (Request $request) {
     throw new Exception('fail');
 });
