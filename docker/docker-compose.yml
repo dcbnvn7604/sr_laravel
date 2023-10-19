@@ -15,6 +15,15 @@ services:
       - db
     extra_hosts:
       - host.docker.internal:host-gateway
+  php-worker:
+    image: sr_laravel-php:latest
+    entrypoint: php artisan queue:work
+    env_file: .env
+    volumes:
+      - ../src:/app
+      - /app/vendor
+      - /app/bootstrap/cache
+      - /app/storage
   nginx:
     image: nginx:1.24-bullseye
     ports:
