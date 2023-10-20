@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Log;
 
 use App\Http\Controllers\Auth;
 use App\Jobs\Job;
+use App\Events\Broadcast;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/auth', [Auth::class, 'post']);
-Route::get('/success', function (Request $request) {
-    return;
-});
+Route::get('/success', function (Request $request) {});
 Route::post('/fail', function (Request $request) {
     throw new Exception('fail');
 });
 Route::get('/queue', function (Request $request) {
     $context = Log::sharedContext();
     Job::dispatch($context['request-id']);
-    return;
+});
+Route::get('/broadcast', function(){
+    Broadcast::dispatch();
 });

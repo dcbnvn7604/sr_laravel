@@ -35,4 +35,9 @@ services:
   db:
     image: postgres:14.8-bullseye
     env_file: .db.env
+  socket:
+    image: quay.io/soketi/soketi:1.4-16-debian
+    env_file: .socket.env
+    ports:
+      - 6001:6001
     
